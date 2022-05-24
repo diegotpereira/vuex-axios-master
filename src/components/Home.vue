@@ -29,23 +29,24 @@ export default {
       palavraPronuncia: ''
     }
   },
+  /* eslint-disable */
   methods: {
     async getPalavra () {
       if (this.palavra === '') {
         return false
       }
-      const resposta = await PalavraService.getPalavra({ palavra: this.palavra })
+      const response = await PalavraService.getPalavra({ palavra: this.palavra })
 
-      let respostas = resposta.data.results
+      let responses = response.data.results
 
-      if (respostas.length === 0) {
+      if (responses.length === 0) {
         this.palavraSignificado = 'Sua palavra não foi encontrada e não foi adicionada.'
         this.palavraDado = ''
 
         return false
       }
-      this.palavraDado = respostas[0]
-      this.palavraSignificado = respostas[0].sensos[0].definition
+      this.palavraDado = responses[0]
+      this.palavraSignificado = responses[0].sensos[0].definition
     }
   }
 
