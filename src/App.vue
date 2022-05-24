@@ -18,7 +18,7 @@ export default {
   data () {
     return {
       palavrasContar: 0,
-      maisRecentePalavra: mais_Recente_Palavra
+      maisRecentePalavra: 'mais_Recente_Palavra'
     }
   }
 }

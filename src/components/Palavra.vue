@@ -25,105 +25,124 @@
         </div>
         <div class="nav-links">
             <router-link v-bind:to="{name: 'Home'}">Principal</router-link>
-            <router-link v-bind="{name: 'PalavraLista'}"></router-link>
+            <router-link v-bind:to="{name: 'PalavraLista'}">Lista de Palavras</router-link>
         </div>
     </div>
 </template>
 <script>
+import PalavraService from '@/services/PalavraService'
 export default {
   name: 'Palavra',
   data () {
         return {
             palavra: this.$route.params.id,
-            palavraId: this$route.params.data.id,
+            palavraId: this.$route.params.data.id,
             parteDaPalavra: '',
             sensos: ''
         }
     },
-    mounted() {
-        this.getPalavraDetalhes(this.palavraId) 
+    mounted () {
+        this.getPalavraDetalhes(this.palavraId)
     },
     methods: {
-        async getPalavraDetalhes(params) {
+        async getPalavraDetalhes (params) {
             const resposta = await PalavraService.getPalavraDetalhes(params)
-            let data = resposta.data.result 
+            let data = resposta.data.result
             this.parteDaPalavra = data.parte_da_palavra
             this.sensos = data.sensos
         }
     }
 }
 </script>
+<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-    .wordlist-container{
-        margin-top: 60px;
+.wordlist-container {
+  margin-top: 60px;
 
-        .wordlist-columns{
-            width: 100%;
-            display: flex;
-            margin: 0 auto;
-            text-align: left;
-            align-items: center;
+  .wordlist-columns {
+    width: 100%;
+    display: flex;
+    margin: 0 auto;
+    text-align: left;
+    align-items: center;
 
-            h2{
-                flex: 0 0 15%;
-                margin-top: 10px;
-                text-align: center;
-            }
-
-            .wordlist {
-                overflow: auto;
-                flex: 0 0 85%;
-
-                ul {
-                    list-style: none;
-                    margin: 0;
-                    padding: 0;
-                    height: calc(100vh-84px);
-                    display: flex;
-                    flex-wrap: wrap;
-                    margin-left: -10px;
-                    margin-top: -10px;
-
-                    li {
-                        text-align:  center;
-                        background: cadetblue;
-                        padding: 10px;
-                        margin: 5px;
-                        flex: 1 0 auto;
-                        box-sizing: border-box;
-                        padding: 10px;
-                        margin-left: 10px;
-                        margin-top: 10px;
-
-                        a {
-                            color: white;
-                            text-decoration: none;
-                        }
-                    }
-                }
-            }
-        }
-        .nav-links{
-            display: flex;
-            width: 100%;
-            position: fixed;
-            bottom: 62px;
-            left: 0;
-            justify-content: space-between;
-
-            a {
-                padding: 20px 50px;
-                text-align: center;
-                background-color: royalblue;
-                -webkit-box-flex: 0;
-                -ms-flex: 0 0 48%;
-                flex: 0 0 48%;
-                margin: 0 20px;
-                box-sizing: border-box;
-                display: block;
-                text-decoration: none;
-                color: white;
-            }
-        }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
     }
+
+    h2 {
+      flex: 0 0 25%;
+      margin-top: 10px;
+      text-align: center;
+      align-self: flex-start;
+    }
+
+    .word-info {
+      overflow: auto;
+      flex: 0 0 75%;
+
+      .words {
+        height: calc(100vh - 200px);
+        overflow: auto;
+      }
+
+      h4{
+        margin-bottom: 10px;
+      }
+    }
+
+    .examples {
+      list-style: circle;
+      margin: 0 0 30px 30px;
+
+      li {
+        line-height: 30px;
+      }
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    width: 100%;
+    position: fixed;
+    bottom: 62px;
+    left: 0;
+    justify-content: center;
+
+    a {
+        padding: 20px 50px;
+        text-align: center;
+        background-color: royalblue;
+        -webkit-box-flex: 0;
+        flex: 0 0 47%;
+        margin: 0 20px;
+        box-sizing: border-box;
+        display: block;
+        text-decoration: none;
+        color: white;
+    }
+  }
+  blockquote {
+    background: #f9f9f9;
+    border-left: 10px solid #ccc;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+    width: fit-content;
+  }
+
+  blockquote:before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+  }
+  blockquote p {
+    display: inline;
+  }
+}
 </style>

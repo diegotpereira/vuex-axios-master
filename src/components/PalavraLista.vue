@@ -17,7 +17,7 @@ export default {
     name: 'PalavraLista',
     data () {
         return {
-            palavras: ['teste', 'comparar', 'exeriocios', 'juiz', 'assuntos', 'mouse', 'ciclo']
+            palavras: ['teste', 'comparar', 'exercicios', 'juiz', 'assuntos', 'mouse', 'ciclo']
         }
     }
 }

@@ -6,9 +6,9 @@
         <button type="submit" @click="getPalavra">Add Palavra</button>
       </div>
       <div class="word-meaning">
-        {{ palavraSignificado || error }}
-        <div class="word-links">
-          <router-link v-bind:to="{name: 'Palavra', params: {id: palavra, palavra: palavra, data: palavraDado }}">consulte Mais informação</router-link>
+        {{ palavraSignificado }}
+        <div class="word-links" v-if="palavraDado">
+          <router-link v-bind:to="{name: 'Palavra', params: {id: palavra, palavra: palavra, data: palavraDado}}">consulte Mais informação</router-link>
           <router-link v-bind:to="{name: 'PalavraLista'}">Palavra Lista</router-link>
         </div>
       </div>
@@ -24,23 +24,14 @@ export default {
     return {
       palavra: '',
       palavraDado: '',
-      error: ''
-    }
-  },
-  computed: {
-    palavraSignificado () {
-      if (this.palavraDado) {
-        return this.palavraDado.senses[0].definition
-      }
-      return '  '
+      palavraSignificado: '',
+      palavraParte: '',
+      palavraPronuncia: ''
     }
   },
   methods: {
     async getPalavra () {
       if (this.palavra === '') {
-        this.error = 'Por favor digite uma palavra'
-        this.palavraDado = ''
-
         return false
       }
       const resposta = await PalavraService.getPalavra({ palavra: this.palavra })
@@ -48,14 +39,16 @@ export default {
       let respostas = resposta.data.results
 
       if (respostas.length === 0) {
-        this.error = 'Sua palavra não foi encontrada e não foi adicionada.'
+        this.palavraSignificado = 'Sua palavra não foi encontrada e não foi adicionada.'
         this.palavraDado = ''
 
         return false
       }
       this.palavraDado = respostas[0]
+      this.palavraSignificado = respostas[0].sensos[0].definition
     }
   }
+
 }
 </script>
 

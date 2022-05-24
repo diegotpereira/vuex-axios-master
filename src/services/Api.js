@@ -1,12 +1,12 @@
 import axios from 'axios'
 
-export default () => {
-    return axios.create({
-        baseUrl: `http://api.pearson.com/v2/dictionaries`,
-        withCredentials: false,
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
-    })
-}
+const Api = axios.create({
+    baseURL: 'http://localhost:8080/',
+    withCredentials: false,
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
+})
+
+export default Api

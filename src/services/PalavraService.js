@@ -1,10 +1,10 @@
 import Api from './Api'
 
 export default {
-    getPalavra(params) {
-        return Api().get('/wordwise/entries?limit=1&headword=' + params.palavra)
+    getPalavra (params) {
+        return Api.get('/http://localhost:8080/' + params.palavra)
     },
-    getPalavraDetalhe(params) {
-        return Api().get('/entries/' + params)
+    getPalavraDetalhe (params) {
+        return Api.get('/entries/' + params)
     }
 }
