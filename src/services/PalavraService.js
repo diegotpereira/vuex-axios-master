@@ -2,9 +2,9 @@ import Api from './Api'
 
 export default {
     getPalavra () {
-        return Api.get('/http://localhost:8080/api/')
+        return Api.get('http://localhost:3000/palavras')
     },
     getPalavraDetalhe (params) {
-        return Api.get('/palavra/' + params)
+        return Api.get('/palavras/' + params)
     }
 }
